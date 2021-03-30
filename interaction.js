@@ -10,31 +10,31 @@ function DragAndDrop(canvas, interactor) {
 	this.mousedown = function(event){
 		this.initX = GetPosition(canvas, event).x;
 		this.initY = GetPosition(canvas, event).y;
-    this.endX = GetPosition(canvas, event).x;
-    this.endY =GetPosition(canvas, event).y;
+    	this.endX = GetPosition(canvas, event).x;
+    	this.endY =GetPosition(canvas, event).y;
 		this.isDown = true;
-    //interactor.onInteractionStart(this);
+    	interactor.onInteractionStart(this);
 		console.log("Mouse down : " + this.initX + " " + this.initY);
-	}.bind(this);
-
-  this.mouseup = function(event){
-		if (this.isDown){
-			this.isDown = false;
-			//interactor.onInteractionEnd(this);
-			console.log("Mouse up : " + this.initX + " " + this.initY + " " + this.endX + " " + this.endY);
-		}
 	}.bind(this);
 
 	this.mousemove = function(event){
 		if (this.isDown){
 			this.endX = GetPosition(canvas, event).x;
 			this.endY = GetPosition(canvas, event).y;
-      //interactor.onInteractionUpdate(this);
+      		interactor.onInteractionUpdate(this);
 			console.log("Mouvement : " + this.endX + " " + this.endY);
 		}
 	}.bind(this);
 
-  canvas.addEventListener('mousedown', this.mousedown);
+  	this.mouseup = function(event){
+		if (this.isDown){
+			this.isDown = false;
+			interactor.onInteractionEnd(this);
+			console.log("Mouse up : " + this.initX + " " + this.initY + " " + this.endX + " " + this.endY);
+		}
+	}.bind(this);
+
+  	canvas.addEventListener('mousedown', this.mousedown);
 	canvas.addEventListener('mousemove', this.mousemove);
 	canvas.addEventListener('mouseup', this.mouseup);
 };
