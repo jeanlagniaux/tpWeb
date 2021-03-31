@@ -11,12 +11,12 @@ function DragAndDrop(canvas, interactor) {
 		this.initX = GetPosition(canvas, event).x;
 		this.initY = GetPosition(canvas, event).y;
     this.endX = GetPosition(canvas, event).x;
-    this.endY =GetPosition(canvas, event).y;
+    this.endY = GetPosition(canvas, event).y;
 		this.isDown = true;
 
 		interactor.onInteractionStart(this);
 
-		console.log("Mouse down : " + this.initX + " " + this.initY);
+		console.log("Mouse down : [ " + this.initX + " ; " + this.initY + " ] ");
 	}.bind(this);
 
 	this.mousemove = function(event){
@@ -26,17 +26,17 @@ function DragAndDrop(canvas, interactor) {
 
 			interactor.onInteractionUpdate(this);
 
-			console.log("Mouvement : " + this.endX + " " + this.endY);
+			console.log("Mouvement : [ " + this.endX + " ; " + this.endY + " ] ");
 		}
 	}.bind(this);
 
-  	this.mouseup = function(event){
+  this.mouseup = function(event){
 		if (this.isDown){
 			this.isDown = false;
 
 			interactor.onInteractionEnd(this);
 
-			console.log("Mouse up : " + this.initX + " " + this.initY + " " + this.endX + " " + this.endY);
+			console.log("Mouse up :  debut [ " + this.initX + " ; " + this.initY + " ] / fin [ " + this.endX + " ; " + this.endY + " ] ");
 		}
 	}.bind(this);
 
